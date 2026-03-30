@@ -22,6 +22,7 @@
       --code-bg: #0f1923;
       --code-text: #e2e8f0;
       --discord: #5865F2;
+      --brain: #7c3aed;
     }
 
     * {
@@ -101,7 +102,7 @@
       justify-content: center;
       align-items: center;
       gap: 0;
-      max-width: 620px;
+      max-width: 700px;
       margin: 0 auto;
     }
 
@@ -627,6 +628,96 @@
       margin-top: 1rem;
     }
 
+    /* ── Brain Step ── */
+    .brain-intro {
+      background: #f5f3ff;
+      border-left: 4px solid var(--brain);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.93rem;
+      color: #3b0764;
+    }
+
+    .brain-intro strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--brain);
+    }
+
+    .brain-substeps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .brain-substep {
+      border: 1px solid #ede9fe;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .brain-substep-header {
+      background: #1e1040;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .brain-step-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--brain);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: Georgia, serif;
+      font-style: italic;
+    }
+
+    .brain-substep-title {
+      color: white;
+      font-size: 0.93rem;
+      font-weight: 600;
+    }
+
+    .brain-substep-body {
+      padding: 1rem 1.1rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      background: white;
+    }
+
+    .brain-explain {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: #f5f3ff;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: #4c1d95;
+      line-height: 1.6;
+    }
+
+    .brain-tip {
+      background: #f5f3ff;
+      border-left: 4px solid var(--brain);
+      border-radius: 0 8px 8px 0;
+      padding: 0.7rem 1rem;
+      font-size: 0.88rem;
+      color: #3b0764;
+      margin-top: 1rem;
+    }
+
     /* ── API Keys Section ── */
     .api-keys {
       margin-top: 1.5rem;
@@ -771,7 +862,7 @@
 
   <!-- Progress Indicator -->
   <div class="progress-wrapper">
-    <div class="progress-label">Setup Progress — 6 Steps</div>
+    <div class="progress-label">Setup Progress — 7 Steps</div>
     <div class="steps-track">
       <div class="step-bubble active" onclick="scrollToStep('step1')">
         <div class="bubble-circle">1</div>
@@ -791,11 +882,15 @@
       </div>
       <div class="step-bubble active" onclick="scrollToStep('step5')">
         <div class="bubble-circle">5</div>
-        <span class="bubble-label">Launch</span>
+        <span class="bubble-label">Discord</span>
       </div>
       <div class="step-bubble active" onclick="scrollToStep('step6')">
         <div class="bubble-circle">6</div>
-        <span class="bubble-label">Discord</span>
+        <span class="bubble-label">Brain</span>
+      </div>
+      <div class="step-bubble active" onclick="scrollToStep('step7')">
+        <div class="bubble-circle">7</div>
+        <span class="bubble-label">Launch</span>
       </div>
     </div>
   </div>
@@ -1146,68 +1241,15 @@ GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \
       </div>
     </div>
 
-    <!-- ── Step 5 ── -->
+    <!-- ── Step 5: Discord ── -->
     <div class="step-card" id="step5">
-      <div class="step-header">
-        <div class="step-number">5</div>
-        <div class="step-title">Start Your AI</div>
+      <div class="step-header" style="background: #3b4ab0;">
+        <div class="step-number" style="background: white; color: var(--discord);">5</div>
+        <div class="step-title">Set Up Your Discord Workspace</div>
         <button class="info-btn" onclick="toggleInfo('info-step5')" id="btn-info-step5" title="What is this?">i</button>
       </div>
       <!-- Info Panel: Step 5 -->
-      <div class="info-panel step-info-panel" id="info-step5">
-        <div class="info-inner">
-          <div class="info-row">
-            <span class="info-icon">💡</span>
-            <span><span class="info-label">What:</span><span class="info-text">Launching your AI in the background</span></span>
-          </div>
-          <div class="info-row">
-            <span class="info-icon">⚡</span>
-            <span><span class="info-label">Why:</span><span class="info-text">The gateway is the always-on process that keeps your AI listening and responding</span></span>
-          </div>
-          <div class="info-row">
-            <span class="info-icon">🎯</span>
-            <span><span class="info-label">How it helps you:</span><span class="info-text">From this point on, your AI is running 24/7 — even when you're asleep, it's processing, learning, and doing work</span></span>
-          </div>
-        </div>
-      </div>
-      <div class="step-body">
-        <p class="step-desc">
-          This starts your AI in the background. It will run quietly even when you close Terminal. Your AI is now live and listening.
-        </p>
-
-        <div class="code-block">
-          <div class="code-wrapper">
-            <pre>openclaw gateway start</pre>
-            <button class="copy-btn" onclick="copyCode(this, 'openclaw gateway start')">Copy</button>
-          </div>
-        </div>
-
-        <p style="color: var(--gray-600); font-size: 0.95rem; margin: 1.25rem 0 0.75rem;">Then verify it's running:</p>
-
-        <div class="code-block">
-          <div class="code-wrapper">
-            <pre>openclaw gateway status</pre>
-            <button class="copy-btn" onclick="copyCode(this, 'openclaw gateway status')">Copy</button>
-          </div>
-        </div>
-
-        <div class="success-note">
-          <strong>✅ Almost there!</strong>
-          If you see <strong>"running"</strong> in the output — your AI is live. One more step: set up your Discord workspace so you can actually talk to it.
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ── Step 6: Discord ── -->
-    <div class="step-card" id="step6">
-      <div class="step-header" style="background: #3b4ab0;">
-        <div class="step-number" style="background: white; color: var(--discord);">6</div>
-        <div class="step-title">Set Up Your Discord Workspace</div>
-        <button class="info-btn" onclick="toggleInfo('info-step6')" id="btn-info-step6" title="What is this?">i</button>
-      </div>
-      <!-- Info Panel: Step 6 -->
-      <div class="info-panel step-info-panel" id="info-step6" style="background: #2a327a;">
+      <div class="info-panel step-info-panel" id="info-step5" style="background: #2a327a;">
         <div class="info-inner">
           <div class="info-row">
             <span class="info-icon">💡</span>
@@ -1312,8 +1354,229 @@ GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \
         </div>
 
         <div class="success-note" style="margin-top: 1.25rem;">
-          <strong>✅ You're done!</strong>
-          Setup complete. Your AI is live, your Gmail is connected, and your Discord workspace is ready. Welcome to the team 🦊
+          <strong>✅ Discord is ready!</strong>
+          One more step before you launch: give your AI its memory, personality, and skills.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Step 6: Brain ── -->
+    <div class="step-card" id="step6">
+      <div class="step-header" style="background: #1e1040;">
+        <div class="step-number" style="background: var(--brain); color: white;">6</div>
+        <div class="step-title">Set Up Your AI's Brain</div>
+        <button class="info-btn" onclick="toggleInfo('info-step6')" id="btn-info-step6" title="What is this?">i</button>
+      </div>
+      <!-- Info Panel: Step 6 -->
+      <div class="info-panel step-info-panel" id="info-step6" style="background: #160b2e;">
+        <div class="info-inner">
+          <div class="info-row">
+            <span class="info-icon">💡</span>
+            <span><span class="info-label">What:</span><span class="info-text">Setting up your AI's memory, personality, skills, and nightly maintenance</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">⚡</span>
+            <span><span class="info-label">Why:</span><span class="info-text">An AI without memory forgets everything. Without skills, it can't do complex tasks. Without the dream routine, it never learns.</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🎯</span>
+            <span><span class="info-label">How it helps you:</span><span class="info-text">After this step, your AI will remember your preferences, automatically triage your inbox, prep your meetings, and get smarter every day it runs.</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="step-body">
+
+        <div class="brain-intro">
+          <strong>🧠 What is this step?</strong>
+          Your AI is installed, but right now it has no memory, no personality, and no context about who you are or what you do. This step gives it a brain.
+        </div>
+
+        <div class="brain-substeps">
+
+          <!-- Sub-section A -->
+          <div class="brain-substep">
+            <div class="brain-substep-header">
+              <div class="brain-step-letter">A</div>
+              <div class="brain-substep-title">Clone the Workspace Templates</div>
+            </div>
+            <div class="brain-substep-body">
+              <div class="code-wrapper" style="border-radius: 8px;">
+                <pre><span class="comment"># This downloads your AI's workspace — the memory system,
+# skills library, and all the configuration files that make
+# your AI actually useful</span>
+git clone https://github.com/jcg8802/candosa-ai-workspace ~/.openclaw/workspace</pre>
+                <button class="copy-btn" onclick="copyCode(this, 'git clone https://github.com/jcg8802/candosa-ai-workspace ~/.openclaw/workspace')">Copy</button>
+              </div>
+              <div class="brain-explain">
+                <strong style="display:block; margin-bottom: 0.3rem; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--brain);">What / Why / How</strong>
+                <strong>What:</strong> Downloading a pre-built workspace with your AI's memory architecture, skills, and templates.<br><br>
+                <strong>Why:</strong> Without this, your AI has no persistent memory, no skills, and no understanding of Candosa's context.<br><br>
+                <strong>How:</strong> After this step, your AI will remember things across sessions, learn your preferences, and have access to pre-built tools like inbox triage, morning briefs, and meeting prep.
+              </div>
+            </div>
+          </div>
+
+          <!-- Sub-section B -->
+          <div class="brain-substep">
+            <div class="brain-substep-header">
+              <div class="brain-step-letter">B</div>
+              <div class="brain-substep-title">Personalize Your AI</div>
+            </div>
+            <div class="brain-substep-body">
+              <div class="code-wrapper" style="border-radius: 8px;">
+                <pre><span class="comment"># Open these files and replace [PLACEHOLDERS] with your info
+# Use any text editor — TextEdit works fine</span>
+open ~/.openclaw/workspace/SOUL.md   <span class="comment"># Your AI's personality</span>
+open ~/.openclaw/workspace/USER.md   <span class="comment"># About you — name, role, timezone</span>
+open ~/.openclaw/workspace/TOOLS.md  <span class="comment"># Your setup specifics</span></pre>
+                <button class="copy-btn" onclick="copyCode(this, 'open ~/.openclaw/workspace/SOUL.md\nopen ~/.openclaw/workspace/USER.md\nopen ~/.openclaw/workspace/TOOLS.md')">Copy</button>
+              </div>
+              <div class="brain-explain">
+                SOUL.md is your AI's personality file — give it a name and tell it what your role is. USER.md tells your AI who you are. These files are the difference between a generic assistant and one that actually knows you.
+              </div>
+            </div>
+          </div>
+
+          <!-- Sub-section C -->
+          <div class="brain-substep">
+            <div class="brain-substep-header">
+              <div class="brain-step-letter">C</div>
+              <div class="brain-substep-title">Set Up Memory</div>
+            </div>
+            <div class="brain-substep-body">
+              <div class="code-wrapper" style="border-radius: 8px;">
+                <pre><span class="comment"># Create your AI's daily memory directory</span>
+mkdir -p ~/.openclaw/workspace/memory
+
+<span class="comment"># Create your long-term memory file</span>
+touch ~/.openclaw/workspace/MEMORY.md</pre>
+                <button class="copy-btn" onclick="copyCode(this, 'mkdir -p ~/.openclaw/workspace/memory\ntouch ~/.openclaw/workspace/MEMORY.md')">Copy</button>
+              </div>
+              <div class="brain-explain">
+                Your AI writes notes to itself every day in the <code style="background:rgba(124,58,237,0.1);padding:1px 5px;border-radius:3px;">memory/</code> folder. The MEMORY.md file is its long-term memory — it reads this at the start of every session so it knows what's happened before. This is how your AI gets smarter over time instead of forgetting everything.
+              </div>
+            </div>
+          </div>
+
+          <!-- Sub-section D -->
+          <div class="brain-substep">
+            <div class="brain-substep-header">
+              <div class="brain-step-letter">D</div>
+              <div class="brain-substep-title">Set Up World State</div>
+            </div>
+            <div class="brain-substep-body">
+              <div class="code-wrapper" style="border-radius: 8px;">
+                <pre><span class="comment"># Create the shared intelligence file</span>
+mkdir -p ~/.openclaw/workspace/data
+touch ~/.openclaw/workspace/data/world-state.md</pre>
+                <button class="copy-btn" onclick="copyCode(this, 'mkdir -p ~/.openclaw/workspace/data\ntouch ~/.openclaw/workspace/data/world-state.md')">Copy</button>
+              </div>
+              <div class="brain-explain">
+                World state is a shared file that all your AI's agents update with their latest findings. Your market agent writes its signals here. Your inbox agent writes what it found. The morning brief agent reads all of it to give you a connected picture instead of disconnected reports.
+              </div>
+            </div>
+          </div>
+
+          <!-- Sub-section E -->
+          <div class="brain-substep">
+            <div class="brain-substep-header">
+              <div class="brain-step-letter">E</div>
+              <div class="brain-substep-title">Install Your Skills</div>
+            </div>
+            <div class="brain-substep-body">
+              <div class="code-wrapper" style="border-radius: 8px;">
+                <pre><span class="comment"># Your AI's skill library — pre-built tools for common tasks
+# Already included in the workspace clone above</span>
+ls ~/.openclaw/workspace/skills/</pre>
+                <button class="copy-btn" onclick="copyCode(this, 'ls ~/.openclaw/workspace/skills/')">Copy</button>
+              </div>
+              <div class="brain-explain">
+                Skills are pre-built workflows your AI follows for specific tasks. The workspace includes: <strong>morning-brief</strong> (daily briefing), <strong>ea-inbox</strong> (email triage), <strong>dream</strong> (nightly memory maintenance), <strong>overnight-ops</strong> (system health checks), and more. Think of them as apps for your AI.
+              </div>
+            </div>
+          </div>
+
+          <!-- Sub-section F -->
+          <div class="brain-substep">
+            <div class="brain-substep-header">
+              <div class="brain-step-letter">F</div>
+              <div class="brain-substep-title">Wire the Dream Routine</div>
+            </div>
+            <div class="brain-substep-body">
+              <div class="code-wrapper" style="border-radius: 8px;">
+                <pre><span class="comment"># Schedule your AI's nightly maintenance
+# This runs at 4:30 AM every night — updates memory, writes session handoff,
+# preps you for tomorrow</span>
+openclaw cron add --name "Dream Routine" \
+  --schedule "30 4 * * *" \
+  --tz "America/New_York" \
+  --skill dream</pre>
+                <button class="copy-btn" onclick="copyCode(this, 'openclaw cron add --name &quot;Dream Routine&quot; \\\n  --schedule &quot;30 4 * * *&quot; \\\n  --tz &quot;America/New_York&quot; \\\n  --skill dream')">Copy</button>
+              </div>
+              <div class="brain-explain">
+                The Dream Routine is your AI's nightly maintenance window. While you sleep, it consolidates what happened today into long-term memory, prepares a handoff for tomorrow's session, and checks your calendar for what needs prep. You wake up to an AI that already knows where things stand.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="brain-tip">
+          🧠 <strong>You're almost there.</strong> Your AI now has memory, personality, and skills. One last step: start it up.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Step 7: Start Your AI ── -->
+    <div class="step-card" id="step7">
+      <div class="step-header">
+        <div class="step-number">7</div>
+        <div class="step-title">Start Your AI</div>
+        <button class="info-btn" onclick="toggleInfo('info-step7')" id="btn-info-step7" title="What is this?">i</button>
+      </div>
+      <!-- Info Panel: Step 7 -->
+      <div class="info-panel step-info-panel" id="info-step7">
+        <div class="info-inner">
+          <div class="info-row">
+            <span class="info-icon">💡</span>
+            <span><span class="info-label">What:</span><span class="info-text">Launching your AI in the background</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">⚡</span>
+            <span><span class="info-label">Why:</span><span class="info-text">The gateway is the always-on process that keeps your AI listening and responding</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🎯</span>
+            <span><span class="info-label">How it helps you:</span><span class="info-text">From this point on, your AI is running 24/7 — even when you're asleep, it's processing, learning, and doing work</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">
+          This starts your AI in the background. It will run quietly even when you close Terminal. Your AI is now live and listening.
+        </p>
+
+        <div class="code-block">
+          <div class="code-wrapper">
+            <pre>openclaw gateway start</pre>
+            <button class="copy-btn" onclick="copyCode(this, 'openclaw gateway start')">Copy</button>
+          </div>
+        </div>
+
+        <p style="color: var(--gray-600); font-size: 0.95rem; margin: 1.25rem 0 0.75rem;">Then verify it's running:</p>
+
+        <div class="code-block">
+          <div class="code-wrapper">
+            <pre>openclaw gateway status</pre>
+            <button class="copy-btn" onclick="copyCode(this, 'openclaw gateway status')">Copy</button>
+          </div>
+        </div>
+
+        <div class="success-note">
+          <strong>✅ Setup complete!</strong>
+          If you see <strong>"running"</strong> in the output — your AI is fully live. It has memory, personality, skills, and a Discord home. Welcome to the team 🦊
         </div>
 
       </div>
