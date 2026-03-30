@@ -21,6 +21,7 @@
       --green-light: #dcfce7;
       --code-bg: #0f1923;
       --code-text: #e2e8f0;
+      --discord: #5865F2;
     }
 
     * {
@@ -100,7 +101,7 @@
       justify-content: center;
       align-items: center;
       gap: 0;
-      max-width: 540px;
+      max-width: 620px;
       margin: 0 auto;
     }
 
@@ -204,6 +205,7 @@
       color: var(--white);
       font-size: 1.2rem;
       font-weight: 600;
+      flex: 1;
     }
 
     .step-body {
@@ -214,6 +216,154 @@
       color: var(--gray-600);
       margin-bottom: 1.25rem;
       font-size: 0.97rem;
+    }
+
+    /* ── Info Bubble Button ── */
+    .info-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      color: rgba(255,255,255,0.9);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s;
+      font-style: italic;
+      font-family: Georgia, serif;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .info-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+
+    .info-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+
+    /* Info button inside tool headers (dark bg variant) */
+    .tool-info-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 1.5px solid rgba(26,39,68,0.4);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.68rem;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s;
+      font-style: italic;
+      font-family: Georgia, serif;
+      user-select: none;
+      line-height: 1;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+
+    .tool-info-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+
+    .tool-info-btn.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+
+    /* ── Info Panel ── */
+    .info-panel {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s ease, opacity 0.25s ease;
+      opacity: 0;
+    }
+
+    .info-panel.open {
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    /* Panel inside step-header (appears below header) */
+    .step-info-panel {
+      background: #0e1b38;
+      border-bottom: 1px solid rgba(201,168,76,0.3);
+    }
+
+    .step-info-panel .info-inner {
+      padding: 1rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .info-icon {
+      flex-shrink: 0;
+      font-size: 1rem;
+      width: 22px;
+      text-align: center;
+      margin-top: 0.05rem;
+    }
+
+    .info-label {
+      font-weight: 700;
+      color: var(--gold);
+      white-space: nowrap;
+      margin-right: 0.2rem;
+    }
+
+    .info-text {
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* Panel inside tool items (appears below tool header) */
+    .tool-info-panel {
+      background: #f0f4ff;
+      border-top: 1px solid #dce3f5;
+    }
+
+    .tool-info-panel .info-inner {
+      padding: 0.85rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .tool-info-panel .info-row {
+      font-size: 0.84rem;
+    }
+
+    .tool-info-panel .info-label {
+      color: var(--navy);
+    }
+
+    .tool-info-panel .info-text {
+      color: var(--gray-600);
     }
 
     /* ── Code Blocks ── */
@@ -346,19 +496,135 @@
       flex-shrink: 0;
     }
 
+    .tool-meta {
+      flex: 1;
+    }
+
     .tool-meta strong {
-      display: block;
+      display: inline;
       font-size: 0.95rem;
       color: var(--navy);
     }
 
     .tool-meta span {
+      display: block;
       font-size: 0.83rem;
       color: var(--gray-600);
+      margin-top: 0.15rem;
     }
 
     .tool-item .code-wrapper {
-      border-radius: 0 0 12px 12px;
+      border-radius: 0;
+    }
+
+    /* ── Discord Step ── */
+    .discord-intro {
+      background: #eef0ff;
+      border-left: 4px solid var(--discord);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.93rem;
+      color: #2e3175;
+    }
+
+    .discord-intro strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--discord);
+    }
+
+    .discord-substeps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    .discord-substep {
+      border: 1px solid var(--gray-200);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .discord-substep-header {
+      background: var(--navy);
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .discord-step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--discord);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .discord-substep-title {
+      color: white;
+      font-size: 0.93rem;
+      font-weight: 600;
+    }
+
+    .discord-substep-body {
+      padding: 0.9rem 1.1rem;
+      font-size: 0.9rem;
+      color: var(--gray-600);
+    }
+
+    .discord-substep-body ul {
+      padding-left: 1.2rem;
+      margin-top: 0.35rem;
+    }
+
+    .discord-substep-body li {
+      margin-bottom: 0.35rem;
+      line-height: 1.5;
+    }
+
+    .channel-tag {
+      display: inline-block;
+      background: #eef0ff;
+      color: var(--discord);
+      font-family: monospace;
+      font-size: 0.82rem;
+      padding: 0.1rem 0.45rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .example-msg {
+      display: block;
+      background: var(--gray-100);
+      border-left: 3px solid var(--gray-200);
+      padding: 0.4rem 0.75rem;
+      margin: 0.3rem 0;
+      font-style: italic;
+      color: var(--gray-800);
+      font-size: 0.88rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .discord-tip {
+      background: #eef0ff;
+      border-left: 4px solid var(--discord);
+      border-radius: 0 8px 8px 0;
+      padding: 0.7rem 1rem;
+      font-size: 0.88rem;
+      color: #2e3175;
+      margin-top: 1rem;
     }
 
     /* ── API Keys Section ── */
@@ -485,6 +751,9 @@
       .steps-track {
         gap: 0;
       }
+      .step-info-panel .info-inner {
+        padding: 0.9rem 1.25rem;
+      }
     }
   </style>
 </head>
@@ -502,7 +771,7 @@
 
   <!-- Progress Indicator -->
   <div class="progress-wrapper">
-    <div class="progress-label">Setup Progress — 5 Steps</div>
+    <div class="progress-label">Setup Progress — 6 Steps</div>
     <div class="steps-track">
       <div class="step-bubble active" onclick="scrollToStep('step1')">
         <div class="bubble-circle">1</div>
@@ -524,6 +793,10 @@
         <div class="bubble-circle">5</div>
         <span class="bubble-label">Launch</span>
       </div>
+      <div class="step-bubble active" onclick="scrollToStep('step6')">
+        <div class="bubble-circle">6</div>
+        <span class="bubble-label">Discord</span>
+      </div>
     </div>
   </div>
 
@@ -535,6 +808,24 @@
       <div class="step-header">
         <div class="step-number">1</div>
         <div class="step-title">Install Homebrew</div>
+        <button class="info-btn" onclick="toggleInfo('info-step1')" id="btn-info-step1" title="What is this?">i</button>
+      </div>
+      <!-- Info Panel: Step 1 -->
+      <div class="info-panel step-info-panel" id="info-step1">
+        <div class="info-inner">
+          <div class="info-row">
+            <span class="info-icon">💡</span>
+            <span><span class="info-label">What:</span><span class="info-text">Installing a tool that lets you install other tools from the command line</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">⚡</span>
+            <span><span class="info-label">Why:</span><span class="info-text">macOS doesn't ship with developer tools by default. Homebrew is the universal installer for everything else in this guide.</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🎯</span>
+            <span><span class="info-label">How it helps you:</span><span class="info-text">You'll never manually download and install developer software again — one command handles everything.</span></span>
+          </div>
+        </div>
       </div>
       <div class="step-body">
         <p class="step-desc">
@@ -570,12 +861,30 @@
 
         <div class="tool-grid">
 
+          <!-- Node.js -->
           <div class="tool-item">
             <div class="tool-item-header">
               <span class="tool-icon">⚡</span>
               <div class="tool-meta">
                 <strong>Node.js</strong>
+                <button class="tool-info-btn" onclick="toggleInfo('info-tool-node')" id="btn-info-tool-node" title="What is this?">i</button>
                 <span>The engine that runs OpenClaw — like the electricity that powers the whole system</span>
+              </div>
+            </div>
+            <div class="info-panel tool-info-panel" id="info-tool-node">
+              <div class="info-inner">
+                <div class="info-row">
+                  <span class="info-icon">💡</span>
+                  <span><span class="info-label">What:</span><span class="info-text">Installing the JavaScript runtime that OpenClaw is built on</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">⚡</span>
+                  <span><span class="info-label">Why:</span><span class="info-text">OpenClaw is a Node.js application. Without it, the software simply won't run.</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">🎯</span>
+                  <span><span class="info-label">How it helps you:</span><span class="info-text">Once installed, it runs silently in the background — you'll never interact with it directly.</span></span>
+                </div>
               </div>
             </div>
             <div class="code-wrapper">
@@ -584,12 +893,30 @@
             </div>
           </div>
 
+          <!-- OpenClaw -->
           <div class="tool-item">
             <div class="tool-item-header">
               <span class="tool-icon">🦊</span>
               <div class="tool-meta">
                 <strong>OpenClaw</strong>
+                <button class="tool-info-btn" onclick="toggleInfo('info-tool-openclaw')" id="btn-info-tool-openclaw" title="What is this?">i</button>
                 <span>Your AI assistant software — this installs the main program that runs your AI</span>
+              </div>
+            </div>
+            <div class="info-panel tool-info-panel" id="info-tool-openclaw">
+              <div class="info-inner">
+                <div class="info-row">
+                  <span class="info-icon">💡</span>
+                  <span><span class="info-label">What:</span><span class="info-text">Installing your AI assistant software</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">⚡</span>
+                  <span><span class="info-label">Why:</span><span class="info-text">This is the core program — it connects all your tools, runs your automations, and manages your AI's brain</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">🎯</span>
+                  <span><span class="info-label">How it helps you:</span><span class="info-text">After setup, your AI will handle your inbox, prep your meetings, and run overnight tasks automatically</span></span>
+                </div>
               </div>
             </div>
             <div class="code-wrapper">
@@ -598,12 +925,30 @@
             </div>
           </div>
 
+          <!-- Cloudflared -->
           <div class="tool-item">
             <div class="tool-item-header">
               <span class="tool-icon">🔒</span>
               <div class="tool-meta">
                 <strong>Cloudflared</strong>
+                <button class="tool-info-btn" onclick="toggleInfo('info-tool-cloudflared')" id="btn-info-tool-cloudflared" title="What is this?">i</button>
                 <span>Your secure internet tunnel — lets your AI receive messages without exposing your Mac. Think of it as a secure post box.</span>
+              </div>
+            </div>
+            <div class="info-panel tool-info-panel" id="info-tool-cloudflared">
+              <div class="info-inner">
+                <div class="info-row">
+                  <span class="info-icon">💡</span>
+                  <span><span class="info-label">What:</span><span class="info-text">Creating a secure tunnel between your Mac and the internet</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">⚡</span>
+                  <span><span class="info-label">Why:</span><span class="info-text">Your AI needs to receive messages and calls from Discord, WhatsApp, and phone calls. This tunnel lets that happen without exposing your Mac.</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">🎯</span>
+                  <span><span class="info-label">How it helps you:</span><span class="info-text">This is what makes your AI reachable 24/7, even on your home or office network</span></span>
+                </div>
               </div>
             </div>
             <div class="code-wrapper">
@@ -612,12 +957,30 @@
             </div>
           </div>
 
+          <!-- GOG -->
           <div class="tool-item">
             <div class="tool-item-header">
               <span class="tool-icon">📧</span>
               <div class="tool-meta">
                 <strong>GOG — Gmail Connector</strong>
+                <button class="tool-info-btn" onclick="toggleInfo('info-tool-gog')" id="btn-info-tool-gog" title="What is this?">i</button>
                 <span>This is how your AI reads and sends emails on your behalf — handles the secure connection to Google</span>
+              </div>
+            </div>
+            <div class="info-panel tool-info-panel" id="info-tool-gog">
+              <div class="info-inner">
+                <div class="info-row">
+                  <span class="info-icon">💡</span>
+                  <span><span class="info-label">What:</span><span class="info-text">Installing the Gmail/Google connector</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">⚡</span>
+                  <span><span class="info-label">Why:</span><span class="info-text">Your AI needs authorized, secure access to your Gmail and Google Calendar</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">🎯</span>
+                  <span><span class="info-label">How it helps you:</span><span class="info-text">Once connected, your AI can read your calendar before meetings, triage your inbox, and draft replies — all without you lifting a finger</span></span>
+                </div>
               </div>
             </div>
             <div class="code-wrapper">
@@ -626,12 +989,30 @@
             </div>
           </div>
 
+          <!-- GitHub CLI -->
           <div class="tool-item">
             <div class="tool-item-header">
               <span class="tool-icon">☁️</span>
               <div class="tool-meta">
                 <strong>GitHub CLI</strong>
+                <button class="tool-info-btn" onclick="toggleInfo('info-tool-gh')" id="btn-info-tool-gh" title="What is this?">i</button>
                 <span>Your AI's backup system — lets your AI save its memory and work to the cloud overnight</span>
+              </div>
+            </div>
+            <div class="info-panel tool-info-panel" id="info-tool-gh">
+              <div class="info-inner">
+                <div class="info-row">
+                  <span class="info-icon">💡</span>
+                  <span><span class="info-label">What:</span><span class="info-text">Installing your AI's cloud backup tool</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">⚡</span>
+                  <span><span class="info-label">Why:</span><span class="info-text">Your AI's memory files, built apps, and notes are backed up to GitHub every night</span></span>
+                </div>
+                <div class="info-row">
+                  <span class="info-icon">🎯</span>
+                  <span><span class="info-label">How it helps you:</span><span class="info-text">If your Mac ever dies or you get a new computer, all your AI's memory and work is restored in minutes</span></span>
+                </div>
               </div>
             </div>
             <div class="code-wrapper">
@@ -649,6 +1030,24 @@
       <div class="step-header">
         <div class="step-number">3</div>
         <div class="step-title">Set Up OpenClaw</div>
+        <button class="info-btn" onclick="toggleInfo('info-step3')" id="btn-info-step3" title="What is this?">i</button>
+      </div>
+      <!-- Info Panel: Step 3 -->
+      <div class="info-panel step-info-panel" id="info-step3">
+        <div class="info-inner">
+          <div class="info-row">
+            <span class="info-icon">💡</span>
+            <span><span class="info-label">What:</span><span class="info-text">Running the configuration wizard</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">⚡</span>
+            <span><span class="info-label">Why:</span><span class="info-text">OpenClaw needs to know your API keys, which channels to listen on, and how to connect to your services</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🎯</span>
+            <span><span class="info-label">How it helps you:</span><span class="info-text">This is the one-time setup that wires everything together. After this, your AI is configured to your account specifically.</span></span>
+          </div>
+        </div>
       </div>
       <div class="step-body">
         <p class="step-desc">
@@ -700,6 +1099,24 @@ openclaw setup</pre>
       <div class="step-header">
         <div class="step-number">4</div>
         <div class="step-title">Connect Your Gmail</div>
+        <button class="info-btn" onclick="toggleInfo('info-step4')" id="btn-info-step4" title="What is this?">i</button>
+      </div>
+      <!-- Info Panel: Step 4 -->
+      <div class="info-panel step-info-panel" id="info-step4">
+        <div class="info-inner">
+          <div class="info-row">
+            <span class="info-icon">💡</span>
+            <span><span class="info-label">What:</span><span class="info-text">Granting your AI secure access to your Gmail account</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">⚡</span>
+            <span><span class="info-label">Why:</span><span class="info-text">Without this, your AI is blind to your inbox and calendar</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🎯</span>
+            <span><span class="info-label">How it helps you:</span><span class="info-text">Your AI will read your morning schedule, flag urgent emails, and draft replies — you review and approve before anything sends</span></span>
+          </div>
+        </div>
       </div>
       <div class="step-body">
         <p class="step-desc">
@@ -734,6 +1151,24 @@ GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \
       <div class="step-header">
         <div class="step-number">5</div>
         <div class="step-title">Start Your AI</div>
+        <button class="info-btn" onclick="toggleInfo('info-step5')" id="btn-info-step5" title="What is this?">i</button>
+      </div>
+      <!-- Info Panel: Step 5 -->
+      <div class="info-panel step-info-panel" id="info-step5">
+        <div class="info-inner">
+          <div class="info-row">
+            <span class="info-icon">💡</span>
+            <span><span class="info-label">What:</span><span class="info-text">Launching your AI in the background</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">⚡</span>
+            <span><span class="info-label">Why:</span><span class="info-text">The gateway is the always-on process that keeps your AI listening and responding</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🎯</span>
+            <span><span class="info-label">How it helps you:</span><span class="info-text">From this point on, your AI is running 24/7 — even when you're asleep, it's processing, learning, and doing work</span></span>
+          </div>
+        </div>
       </div>
       <div class="step-body">
         <p class="step-desc">
@@ -757,8 +1192,113 @@ GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \
         </div>
 
         <div class="success-note">
+          <strong>✅ Almost there!</strong>
+          If you see <strong>"running"</strong> in the output — your AI is live. One more step: set up your Discord workspace so you can actually talk to it.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Step 6: Discord ── -->
+    <div class="step-card" id="step6">
+      <div class="step-header" style="background: #3b4ab0;">
+        <div class="step-number" style="background: white; color: var(--discord);">6</div>
+        <div class="step-title">Set Up Your Discord Workspace</div>
+        <button class="info-btn" onclick="toggleInfo('info-step6')" id="btn-info-step6" title="What is this?">i</button>
+      </div>
+      <!-- Info Panel: Step 6 -->
+      <div class="info-panel step-info-panel" id="info-step6" style="background: #2a327a;">
+        <div class="info-inner">
+          <div class="info-row">
+            <span class="info-icon">💡</span>
+            <span><span class="info-label">What:</span><span class="info-text">Setting up the interface where you communicate with your AI</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">⚡</span>
+            <span><span class="info-label">Why:</span><span class="info-text">Your AI needs a home base — Discord is where it lives, reports, and waits for your instructions</span></span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🎯</span>
+            <span><span class="info-label">How it helps you:</span><span class="info-text">Instead of switching between tools, everything your AI does surfaces in one place. Your inbox, calendar, deals, intel — all in one server.</span></span>
+          </div>
+        </div>
+      </div>
+      <div class="step-body">
+
+        <div class="discord-intro">
+          <strong>🎮 What is Discord?</strong>
+          Discord is where you talk to your AI and where it sends you updates. Think of it as your AI's home base — every report, alert, and task output lands here.
+        </div>
+
+        <div class="discord-substeps">
+
+          <!-- Sub-step 1 -->
+          <div class="discord-substep">
+            <div class="discord-substep-header">
+              <div class="discord-step-num">1</div>
+              <div class="discord-substep-title">Create your Discord account (if you don't have one)</div>
+            </div>
+            <div class="discord-substep-body">
+              <ul>
+                <li>Go to <a href="https://discord.com" target="_blank" style="color: var(--discord); font-weight: 600;">discord.com</a> → <strong>Create an Account</strong></li>
+                <li>Use your Candosa email address</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-step 2 -->
+          <div class="discord-substep">
+            <div class="discord-substep-header">
+              <div class="discord-step-num">2</div>
+              <div class="discord-substep-title">Join the Candosa JClaw Server</div>
+            </div>
+            <div class="discord-substep-body">
+              <ul>
+                <li>JC will send you an invite link</li>
+                <li>Accept it — this is your team's AI workspace</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-step 3 -->
+          <div class="discord-substep">
+            <div class="discord-substep-header">
+              <div class="discord-step-num">3</div>
+              <div class="discord-substep-title">Your key channels</div>
+            </div>
+            <div class="discord-substep-body">
+              <ul>
+                <li><span class="channel-tag">#general-jclaw</span> — Talk to your AI here. Ask questions, give instructions, kick off projects.</li>
+                <li><span class="channel-tag">#morning-brief</span> — Your daily briefing arrives here at 8 AM</li>
+                <li><span class="channel-tag">#inbox</span> — Email drafts and escalations land here</li>
+                <li><span class="channel-tag">#ops-log</span> — What your AI did overnight (audit trail)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Sub-step 4 -->
+          <div class="discord-substep">
+            <div class="discord-substep-header">
+              <div class="discord-step-num">4</div>
+              <div class="discord-substep-title">How to talk to your AI</div>
+            </div>
+            <div class="discord-substep-body">
+              <p style="margin-bottom: 0.5rem;">Just type in <span class="channel-tag">#general-jclaw</span> — no commands needed, no prefix, just natural language:</p>
+              <span class="example-msg">"Prep me for my 2pm call with Marco"</span>
+              <span class="example-msg">"Draft a reply to the email from Sabrina"</span>
+              <span class="example-msg">"What's on my calendar today?"</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="discord-tip">
+          📌 <strong>Tip:</strong> Pin the server to your Discord sidebar. This is your AI's dashboard — it's where everything lives.
+        </div>
+
+        <div class="success-note" style="margin-top: 1.25rem;">
           <strong>✅ You're done!</strong>
-          If you see <strong>"running"</strong> in the output — your AI is live. Everything is set up correctly. Welcome to the team 🦊
+          Setup complete. Your AI is live, your Gmail is connected, and your Discord workspace is ready. Welcome to the team 🦊
         </div>
 
       </div>
@@ -769,8 +1309,8 @@ GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \
       <h2>🚀 What's Next?</h2>
       <ul class="next-list">
         <li>JClaw (JC's AI) will reach out to your AI to set up your channels and custom skills — no action needed on your part</li>
-        <li>Your first morning brief will arrive tomorrow at 8 AM — a daily summary of your calendar, inbox, and priorities</li>
-        <li>Questions? Message <strong>@JClaw</strong> in Discord and your AI will sort it out</li>
+        <li>Your first morning brief will arrive tomorrow at 8 AM in <strong>#morning-brief</strong> — a daily summary of your calendar, inbox, and priorities</li>
+        <li>Questions? Message your AI in <strong>#general-jclaw</strong> and it will sort it out</li>
       </ul>
     </div>
 
@@ -783,7 +1323,6 @@ GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \
 
   <script>
     function copyCode(btn, text) {
-      // Decode any HTML entities in the text
       const decoded = text
         .replace(/&quot;/g, '"')
         .replace(/&amp;/g, '&')
@@ -798,7 +1337,6 @@ GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \
           btn.classList.remove('copied');
         }, 2000);
       }).catch(() => {
-        // Fallback
         const el = document.createElement('textarea');
         el.value = decoded;
         document.body.appendChild(el);
@@ -817,6 +1355,17 @@ GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \
     function scrollToStep(id) {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function toggleInfo(panelId) {
+      const panel = document.getElementById(panelId);
+      const btnId = 'btn-' + panelId;
+      const btn = document.getElementById(btnId);
+      if (!panel) return;
+
+      const isOpen = panel.classList.contains('open');
+      panel.classList.toggle('open', !isOpen);
+      if (btn) btn.classList.toggle('active', !isOpen);
     }
   </script>
 
