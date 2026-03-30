@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenClaw Setup Guide — Candosa</title>
+  <style>
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243260;
+      --gold: #c9a84c;
+      --gold-light: #e0c06e;
+      --white: #ffffff;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-600: #4b5563;
+      --gray-800: #1f2937;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --code-bg: #0f1923;
+      --code-text: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 2.5rem 1.5rem 2rem;
+      text-align: center;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .logo-fox {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .logo-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* ── Progress Bar ── */
+    .progress-wrapper {
+      background: var(--navy-light);
+      padding: 1.25rem 1.5rem;
+      border-bottom: 2px solid var(--gold);
+    }
+
+    .progress-label {
+      text-align: center;
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .steps-track {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .step-bubble {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      flex: 1;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .step-bubble:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: calc(50% + 16px);
+      width: calc(100% - 32px);
+      height: 2px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .bubble-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.2s;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-bubble.active .bubble-circle {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+      box-shadow: 0 0 0 4px rgba(201,168,76,0.25);
+    }
+
+    .bubble-label {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      max-width: 70px;
+      line-height: 1.2;
+    }
+
+    .step-bubble.active .bubble-label {
+      color: var(--gold);
+    }
+
+    /* ── Main Content ── */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── Step Cards ── */
+    .step-card {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      margin-bottom: 2rem;
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+      scroll-margin-top: 80px;
+    }
+
+    .step-header {
+      background: var(--navy);
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      color: var(--white);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .step-body {
+      padding: 1.75rem;
+    }
+
+    .step-desc {
+      color: var(--gray-600);
+      margin-bottom: 1.25rem;
+      font-size: 0.97rem;
+    }
+
+    /* ── Code Blocks ── */
+    .code-block {
+      margin-bottom: 1.25rem;
+    }
+
+    .code-block-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray-400);
+      margin-bottom: 0.4rem;
+    }
+
+    .code-wrapper {
+      position: relative;
+      background: var(--code-bg);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .code-wrapper pre {
+      padding: 1.1rem 1.25rem;
+      padding-right: 5rem;
+      overflow-x: auto;
+      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--code-text);
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .code-wrapper pre .comment {
+      color: #64748b;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.6rem;
+      right: 0.6rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.7);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .copy-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+    }
+
+    .copy-btn.copied {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    /* ── Notes / Tips ── */
+    .note {
+      background: #fffbeb;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9rem 1.1rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #78350f;
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #92400e;
+    }
+
+    .success-note {
+      background: var(--green-light);
+      border-left: 4px solid var(--green);
+      border-radius: 0 8px 8px 0;
+      padding: 0.9rem 1.1rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #14532d;
+    }
+
+    .success-note strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Sub-tools in Step 2 ── */
+    .tool-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .tool-item {
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .tool-item-header {
+      background: var(--gray-100);
+      padding: 0.75rem 1.1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .tool-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .tool-meta strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--navy);
+    }
+
+    .tool-meta span {
+      font-size: 0.83rem;
+      color: var(--gray-600);
+    }
+
+    .tool-item .code-wrapper {
+      border-radius: 0 0 12px 12px;
+    }
+
+    /* ── API Keys Section ── */
+    .api-keys {
+      margin-top: 1.5rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .api-keys-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0.75rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .api-key-item {
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .api-key-item:last-child {
+      border-bottom: none;
+    }
+
+    .api-key-name {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .api-key-url {
+      font-size: 0.82rem;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+      font-family: monospace;
+    }
+
+    .api-key-url a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .api-key-url a:hover {
+      text-decoration: underline;
+    }
+
+    .api-key-note {
+      font-size: 0.83rem;
+      color: var(--gray-600);
+    }
+
+    /* ── Footer / Next Steps ── */
+    .next-steps {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 2rem 1.75rem;
+      color: var(--white);
+      margin-top: 2.5rem;
+    }
+
+    .next-steps h2 {
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .next-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .next-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .next-list li::before {
+      content: '→';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.02rem;
+    }
+
+    /* ── Page Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--gray-400);
+      font-size: 0.8rem;
+    }
+
+    footer span {
+      color: var(--gold);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .step-header {
+        padding: 1rem 1.25rem;
+      }
+      .step-body {
+        padding: 1.25rem;
+      }
+      .bubble-label {
+        display: none;
+      }
+      .steps-track {
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo-row">
+      <span class="logo-fox">🦊</span>
+      <span class="logo-text">Candosa · OpenClaw</span>
+    </div>
+    <h1>Employee AI Setup Guide</h1>
+    <p>Get your personal AI assistant up and running in about 15 minutes. No technical experience needed.</p>
+  </header>
+
+  <!-- Progress Indicator -->
+  <div class="progress-wrapper">
+    <div class="progress-label">Setup Progress — 5 Steps</div>
+    <div class="steps-track">
+      <div class="step-bubble active" onclick="scrollToStep('step1')">
+        <div class="bubble-circle">1</div>
+        <span class="bubble-label">Homebrew</span>
+      </div>
+      <div class="step-bubble active" onclick="scrollToStep('step2')">
+        <div class="bubble-circle">2</div>
+        <span class="bubble-label">Core Tools</span>
+      </div>
+      <div class="step-bubble active" onclick="scrollToStep('step3')">
+        <div class="bubble-circle">3</div>
+        <span class="bubble-label">Configure</span>
+      </div>
+      <div class="step-bubble active" onclick="scrollToStep('step4')">
+        <div class="bubble-circle">4</div>
+        <span class="bubble-label">Gmail</span>
+      </div>
+      <div class="step-bubble active" onclick="scrollToStep('step5')">
+        <div class="bubble-circle">5</div>
+        <span class="bubble-label">Launch</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- ── Step 1 ── -->
+    <div class="step-card" id="step1">
+      <div class="step-header">
+        <div class="step-number">1</div>
+        <div class="step-title">Install Homebrew</div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">
+          Homebrew is Mac's package manager — think of it as the App Store for developer tools.
+          You'll only ever install it once, and it makes everything else in this guide possible.
+        </p>
+
+        <div class="code-block">
+          <div class="code-wrapper">
+            <pre><span class="comment"># Paste this into Terminal and press Enter</span>
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre>
+            <button class="copy-btn" onclick="copyCode(this, '/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;')">Copy</button>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>💡 What to expect</strong>
+          This will open Terminal and ask for your Mac password. That's normal — it needs permission to install software. Type your password and press Enter (nothing will appear as you type — that's a security feature).
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Step 2 ── -->
+    <div class="step-card" id="step2">
+      <div class="step-header">
+        <div class="step-number">2</div>
+        <div class="step-title">Install the Core Tools</div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">
+          Run each command below in Terminal, one at a time. Wait for each to finish before running the next — you'll know it's done when you see a <code style="background:var(--gray-100);padding:1px 5px;border-radius:4px;font-size:0.85em;">$</code> prompt again.
+        </p>
+
+        <div class="tool-grid">
+
+          <div class="tool-item">
+            <div class="tool-item-header">
+              <span class="tool-icon">⚡</span>
+              <div class="tool-meta">
+                <strong>Node.js</strong>
+                <span>The engine that runs OpenClaw — like the electricity that powers the whole system</span>
+              </div>
+            </div>
+            <div class="code-wrapper">
+              <pre>brew install node</pre>
+              <button class="copy-btn" onclick="copyCode(this, 'brew install node')">Copy</button>
+            </div>
+          </div>
+
+          <div class="tool-item">
+            <div class="tool-item-header">
+              <span class="tool-icon">🦊</span>
+              <div class="tool-meta">
+                <strong>OpenClaw</strong>
+                <span>Your AI assistant software — this installs the main program that runs your AI</span>
+              </div>
+            </div>
+            <div class="code-wrapper">
+              <pre>npm install -g openclaw</pre>
+              <button class="copy-btn" onclick="copyCode(this, 'npm install -g openclaw')">Copy</button>
+            </div>
+          </div>
+
+          <div class="tool-item">
+            <div class="tool-item-header">
+              <span class="tool-icon">🔒</span>
+              <div class="tool-meta">
+                <strong>Cloudflared</strong>
+                <span>Your secure internet tunnel — lets your AI receive messages without exposing your Mac. Think of it as a secure post box.</span>
+              </div>
+            </div>
+            <div class="code-wrapper">
+              <pre>brew install cloudflared</pre>
+              <button class="copy-btn" onclick="copyCode(this, 'brew install cloudflared')">Copy</button>
+            </div>
+          </div>
+
+          <div class="tool-item">
+            <div class="tool-item-header">
+              <span class="tool-icon">📧</span>
+              <div class="tool-meta">
+                <strong>GOG — Gmail Connector</strong>
+                <span>This is how your AI reads and sends emails on your behalf — handles the secure connection to Google</span>
+              </div>
+            </div>
+            <div class="code-wrapper">
+              <pre>npm install -g gogcli</pre>
+              <button class="copy-btn" onclick="copyCode(this, 'npm install -g gogcli')">Copy</button>
+            </div>
+          </div>
+
+          <div class="tool-item">
+            <div class="tool-item-header">
+              <span class="tool-icon">☁️</span>
+              <div class="tool-meta">
+                <strong>GitHub CLI</strong>
+                <span>Your AI's backup system — lets your AI save its memory and work to the cloud overnight</span>
+              </div>
+            </div>
+            <div class="code-wrapper">
+              <pre>brew install gh</pre>
+              <button class="copy-btn" onclick="copyCode(this, 'brew install gh')">Copy</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Step 3 ── -->
+    <div class="step-card" id="step3">
+      <div class="step-header">
+        <div class="step-number">3</div>
+        <div class="step-title">Set Up OpenClaw</div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">
+          Run the setup wizard — it will ask you a few questions and create your AI's config file.
+          It takes about 5 minutes.
+        </p>
+
+        <div class="code-block">
+          <div class="code-wrapper">
+            <pre><span class="comment"># This runs the setup wizard</span>
+openclaw setup</pre>
+            <button class="copy-btn" onclick="copyCode(this, 'openclaw setup')">Copy</button>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>📋 What the wizard asks for</strong>
+          The wizard will ask for your API keys — see below for where to get them. Have both ready before you run this command. Setup takes about 5 minutes.
+        </div>
+
+        <!-- API Keys Sub-section -->
+        <div class="api-keys">
+          <div class="api-keys-header">
+            🔑 &nbsp;Where to Get Your API Keys
+          </div>
+          <div class="api-key-item">
+            <div class="api-key-name">Anthropic — The AI Brain</div>
+            <div class="api-key-url">
+              <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>
+              &nbsp;→ API Keys → Create Key
+            </div>
+            <div class="api-key-note">This is the key that gives your AI its intelligence. JC will set a spending limit on your key so there are no surprises.</div>
+          </div>
+          <div class="api-key-item">
+            <div class="api-key-name">Brave Search — Web Access</div>
+            <div class="api-key-url">
+              <a href="https://api.search.brave.com" target="_blank">api.search.brave.com</a>
+              &nbsp;→ Subscribe → Free Tier
+            </div>
+            <div class="api-key-note">This lets your AI search the web. The free tier is plenty for daily use — no payment info needed.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Step 4 ── -->
+    <div class="step-card" id="step4">
+      <div class="step-header">
+        <div class="step-number">4</div>
+        <div class="step-title">Connect Your Gmail</div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">
+          This connects your Candosa Google account to your AI, so it can read your calendar and help manage your inbox.
+        </p>
+
+        <div class="code-block">
+          <div class="code-block-label">Replace the email address with yours before running</div>
+          <div class="code-wrapper">
+            <pre><span class="comment"># Replace 'yourname@candosa.com' with your actual email</span>
+GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \
+  --client jclaw-personal --services gmail,calendar,contacts</pre>
+            <button class="copy-btn" onclick="copyCode(this, 'GOG_KEYRING_PASSWORD=YourChosenPassword gog auth add yourname@candosa.com \\\n  --client jclaw-personal --services gmail,calendar,contacts')">Copy</button>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>🌐 What happens next</strong>
+          This opens a browser window asking you to log into your Candosa Google account. Click <strong>Allow</strong> — your AI will then be able to read your calendar and manage your inbox on your behalf.
+        </div>
+
+        <div class="note" style="background:#eff6ff; border-color: #3b82f6; color: #1e3a5f; margin-top: 0.75rem;">
+          <strong style="color:#1e40af;">🔐 About YourChosenPassword</strong>
+          Replace <code style="background:rgba(0,0,0,0.08);padding:1px 4px;border-radius:3px;">YourChosenPassword</code> with any password you choose. This is a local encryption password for storing your Gmail credentials — it never leaves your machine. Write it down somewhere safe.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── Step 5 ── -->
+    <div class="step-card" id="step5">
+      <div class="step-header">
+        <div class="step-number">5</div>
+        <div class="step-title">Start Your AI</div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">
+          This starts your AI in the background. It will run quietly even when you close Terminal. Your AI is now live and listening.
+        </p>
+
+        <div class="code-block">
+          <div class="code-wrapper">
+            <pre>openclaw gateway start</pre>
+            <button class="copy-btn" onclick="copyCode(this, 'openclaw gateway start')">Copy</button>
+          </div>
+        </div>
+
+        <p style="color: var(--gray-600); font-size: 0.95rem; margin: 1.25rem 0 0.75rem;">Then verify it's running:</p>
+
+        <div class="code-block">
+          <div class="code-wrapper">
+            <pre>openclaw gateway status</pre>
+            <button class="copy-btn" onclick="copyCode(this, 'openclaw gateway status')">Copy</button>
+          </div>
+        </div>
+
+        <div class="success-note">
+          <strong>✅ You're done!</strong>
+          If you see <strong>"running"</strong> in the output — your AI is live. Everything is set up correctly. Welcome to the team 🦊
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── What's Next ── -->
+    <div class="next-steps">
+      <h2>🚀 What's Next?</h2>
+      <ul class="next-list">
+        <li>JClaw (JC's AI) will reach out to your AI to set up your channels and custom skills — no action needed on your part</li>
+        <li>Your first morning brief will arrive tomorrow at 8 AM — a daily summary of your calendar, inbox, and priorities</li>
+        <li>Questions? Message <strong>@JClaw</strong> in Discord and your AI will sort it out</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- Page Footer -->
+  <footer>
+    Built for <span>Candosa</span> · Powered by <span>OpenClaw 🦊</span>
+  </footer>
+
+  <script>
+    function copyCode(btn, text) {
+      // Decode any HTML entities in the text
+      const decoded = text
+        .replace(/&quot;/g, '"')
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>');
+
+      navigator.clipboard.writeText(decoded).then(() => {
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      }).catch(() => {
+        // Fallback
+        const el = document.createElement('textarea');
+        el.value = decoded;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function scrollToStep(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+
+</body>
+</html>
